@@ -1,0 +1,14 @@
+{% extends "hometouser/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block loginform %}
+
+<div class="d-flex justify-content-center">
+    <form action="{% url 'hometouser:login' %}" method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="btn btn-secondary" type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock %}
