@@ -4,11 +4,13 @@ from .models import Task
 # Create your views here.
 
 def board(request):
-    return render(request, "board/board.html")
+    form = TaskForm()
+    return render(request, "board/board.html", {'form': form})
 
 def createTask(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
+        print(request.user)
         if form.is_valid():
             task = Task(
                 name = form.cleaned_data['name'],
@@ -16,13 +18,12 @@ def createTask(request):
                 due_date = form.cleaned_data['due_date'],
                 user_on_task = form.cleaned_data['user_on_task'],
             )
-            print(request.user)
             task.user = request.user
             task.save()
             
     else:
         form = TaskForm()
-    return render(request, 'board/task.html', {'form': form})
+    return render(request, 'board/board.html', {'form': form})
 
 
 def displayBoard(request):

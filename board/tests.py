@@ -46,7 +46,7 @@ class MySeleniumTestsBoard(StaticLiveServerTestCase):
         # getting the actual text here instead of an ID or Name because it is a dropdown/I didnt want to add an id to it
         board_option = self.selenium.find_element(By.XPATH, '//a[text()="Board"]')  # or another selector
         board_option.click()
-        create_task = self.selenium.find_element(By.ID, "createtask")
+        create_task = self.selenium.find_element(By.ID, "task")
         create_task.click()
         name_input = self.selenium.find_element(By.NAME, "name")
         name_input.send_keys("Clean")
