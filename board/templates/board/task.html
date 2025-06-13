@@ -1,0 +1,9 @@
+{% extends 'board/board.html' %} {% load crispy_forms_tags %} 
+{% block taskform%}
+<div class="d-flex justify-content-center">
+  <form id="createTask" action="{% url 'board:createTask' %}" method="POST">
+    {% csrf_token %} {{ form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="Submit" />
+  </form>
+</div>
+{%endblock%}
