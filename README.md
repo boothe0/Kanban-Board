@@ -30,8 +30,9 @@
 1) Full user authentication and database storage.
 2) Passwords are hashed correctly for secure login.
 3) Routing between pages.
-4) HTML and CSS are connected.
+4) Javascript/HTML/CSS is connected with Django
 5) Selenium is connected.
+6) Tasks update separately for each user using cards.
 
 ### In progress...
 
