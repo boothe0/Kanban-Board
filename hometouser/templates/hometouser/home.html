@@ -16,14 +16,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-tem"></li>
-        <li class="nav-item">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            href="{% url 'hometouser:home' display_name=user.username%}"
-            >Home</a
-          >
-        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -53,17 +45,13 @@
         <button class="btn btn-outline-success me-3" type="submit">
           Search
         </button>
+        <a class="btn btn-outline-danger" href="{% url 'hometouser:logout' %}">
+          Logout
+        </a>
       </form>
-      <a
-        class="logout-btn btn btn-outline-danger"
-        href="{% url 'hometouser:logout' %}"
-      >
-        Logout
-      </a>
     </div>
   </div>
 </nav>
-{%endblock%} {% block enter_username %} {{display_name}} {% endblock %} 
-{% block start_message%}
+{%endblock%} {% block enter_username %} {{display_name}} {% endblock %} {% block start_message%}
 <div class="fs-1 text-center start-message">Cick on views to get started!</div>
 {%endblock%}

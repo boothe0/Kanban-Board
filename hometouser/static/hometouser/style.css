@@ -1,13 +1,7 @@
-img{
-    max-width: 300px;
+img {
+  max-width: 300px;
 }
 
-.login-wrapper{
-    width: fit-content;
-}
-
-@media screen and (max-width:400px){
-    .logout-btn{
-        padding-top: 20px;
-    }
+.login-wrapper {
+  width: fit-content;
 }

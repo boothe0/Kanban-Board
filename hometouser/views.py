@@ -23,7 +23,9 @@ def make_account(request):
             )
             user.set_password(form.cleaned_data['password1'])
             user.save()
-            url = reverse("hometouser:home", args=[user.username])
+            # login so the user is saved and can immediately login
+            login(request, user)
+            url = reverse("hometouser:home", kwargs={'display_name': user.username})
             return redirect(url)
         else:
             # form invalid — render with errors
