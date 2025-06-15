@@ -87,27 +87,78 @@
       >
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-primary ms-3"
         id="task"
         data-toggle="modal"
-        data-target="#exampleModal"
+        data-target="#taskModal"
+        name="submitTask"
       >
         Create Task
       </button>
+      <button
+        type="button"
+        class="btn btn-primary ms-3"
+        id="category"
+        data-toggle="modal"
+        data-target="#categoryModal"
+        name="submitCategory"
+      >
+        Create Category
+      </button>
     </div>
-
+    <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="categoryModal"
       tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
+      aria-labelledby="categoryModalLabel"
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
+            <h5 class="modal-title" id="categoryModalLabel">Modal title</h5>
+          </div>
+          <div class="modal-body">
+            <form
+              id="createTask"
+              method="POST"
+              action="{%url 'board:board_and_task'%}"
+            >
+              {% csrf_token %} {{ categoryForm|crispy }}
+              <input
+                class="btn btn-secondary"
+                type="submit"
+                value="Submit"
+                name="submitCategory"
+              />
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="taskModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="taskModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="taskModalLabel">
               Enter the task to complete.
             </h5>
           </div>
@@ -118,8 +169,13 @@
                 method="POST"
                 action="{%url 'board:board_and_task'%}"
               >
-                {% csrf_token %} {{ form|crispy }}
-                <input class="btn btn-secondary" type="submit" value="Submit" />
+                {% csrf_token %} {{ taskForm|crispy }}
+                <input
+                  class="btn btn-secondary"
+                  type="submit"
+                  value="Submit"
+                  name="submitTask"
+                />
               </form>
             </div>
           </div>
@@ -135,29 +191,47 @@
         </div>
       </div>
     </div>
-    <div class="d-flex justify-content-sm-start justify-content-center">
-      {% for task in tasks%} {%if user.username == task.user.username%}
-      <div class="card mt-5 pe-3" style="width: 18rem">
-        <div class="card-body position-relative">
-          <span
+    <div class="row">
+      {% for category in categories %}
+      {%if user.username == category.user.username%}
+      <div class="col-md ps-lg-5 ms-2 me-2 pe-lg-5">
+        <h1 class="text-center">{{ category.category }}</h1>
+      {%endif%}
+        {% for task in tasks %} {% if category.category == task.category.category and user.username == task.user.username %}
+        <div class="card my-3" style="width: 100%">
+          <div class="card-body position-relative">
+            <span
+              data-task-id="{{task.name}}"
+              onclick="delete_card(this)"
+              class="position-absolute top-0 start-100 translate-middle d-none d-lg-block"
+              style="cursor: pointer"
+              >&#10005;</span
+            >
+
+            <h5 class="card-title">{{ task.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              {{ task.due_date }}
+            </h6>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              {{ task.category }}
+            </h6>
+            <p class="card-text">{{ task.description }}</p>
+            <ul>
+              <li>Assigned to: {{ task.user_on_task }}</li>
+              <li>Created by: {{ task.user.username }}</li>
+            </ul>
+            <span
             data-task-id="{{task.name}}"
             onclick="delete_card(this)"
-            class="position-absolute top-0 start-100"
+            class=" d-block d-md-none"
             style="cursor: pointer"
-            >&#10005;</span
-          >
-          <h5 class="card-title">{{task.name}}</h5>
-          <h6 class="card-subtitle mb-2 text-body-secondary">
-            {{task.due_date}}
-          </h6>
-          <p class="card-text">{{task.description}}</p>
-          <ul>
-            <li>Assigned to: {{task.user_on_task}}</li>
-            <li>Created by: {{task.user.username}}</li>
-          </ul>
+            > Delete This
+            </span>
+          </div>
         </div>
+        {% endif %} {% endfor %}
       </div>
-      {%endif%} {%endfor%}
+      {% endfor %}
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script

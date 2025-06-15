@@ -1,31 +1,55 @@
 from django.shortcuts import render, redirect
-from .forms import TaskForm
-from .models import Task
+from .forms import TaskForm, CategoryForm
+from .models import Task, Category
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
 
 def board_and_task(request):
-    form = TaskForm()
-    tasks = Task.objects.all()
-    context = {'form' : form, 'tasks' : tasks}
     if request.method == 'POST':
-        form = TaskForm(request.POST)
-        print(request.user)
-        if form.is_valid():
-            task = Task(
-                name = form.cleaned_data['name'],
-                description = form.cleaned_data['description'],
-                due_date = form.cleaned_data['due_date'],
-                user_on_task = form.cleaned_data['user_on_task'],
-            )
-            task.user = request.user
-            task.save()
+        if 'submitTask' in request.POST:
+            taskForm = TaskForm(request.POST, prefix='task')
+            categoryForm = CategoryForm(prefix='category')
+            if taskForm.is_valid():
+                task = Task(
+                    name = taskForm.cleaned_data['name'],
+                    description = taskForm.cleaned_data['description'],
+                    due_date = taskForm.cleaned_data['due_date'],
+                    user_on_task = taskForm.cleaned_data['user_on_task'],
+                    category = taskForm.cleaned_data['category']
+                )
+                task.user = request.user
+                task.save()
             
+        elif 'submitCategory' in request.POST:
+            categoryForm = CategoryForm(request.POST, prefix='category')
+            taskForm = TaskForm(prefix='task')
+            if categoryForm.is_valid():
+                username = categoryForm.cleaned_data['user']
+                try:
+                    userCreatedCat = User.objects.get(username = username)
+                except User.DoesNotExist:
+                    messages.error(request, "Try a different user")
+                    return redirect('board:board_and_task')
+                category = Category(
+                    category = categoryForm.cleaned_data['category'],
+                    color = categoryForm.cleaned_data['color'],
+                    user = userCreatedCat
+                )
+                
+                category.save()
     else:
-        form = TaskForm()
-    return render(request, "board/board.html", context)
+        # only make the empty forms once rather than at the top
+        taskForm = TaskForm(prefix="task")
+        categoryForm = CategoryForm(prefix="category")
+    # pass these in for use in html
+    categories = Category.objects.all()
+    tasks = Task.objects.all()
+    context = {'taskForm' : taskForm, 'categoryForm' : categoryForm, 'tasks' : tasks, 'categories' : categories}
 
+    return render(request, "board/board.html", context)
 
 def displayBoard(request):
     # if there is a get request to task_delete/ 
