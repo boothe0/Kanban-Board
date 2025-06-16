@@ -8,6 +8,7 @@ from django.contrib import messages
 # Create your views here.
 
 def board_and_task(request):
+
     if request.method == 'POST':
         if 'submitTask' in request.POST:
             taskForm = TaskForm(request.POST, prefix='task')
@@ -27,22 +28,17 @@ def board_and_task(request):
             categoryForm = CategoryForm(request.POST, prefix='category')
             taskForm = TaskForm(prefix='task')
             if categoryForm.is_valid():
-                username = categoryForm.cleaned_data['user']
-                try:
-                    userCreatedCat = User.objects.get(username = username)
-                except User.DoesNotExist:
-                    messages.error(request, "Try a different user")
-                    return redirect('board:board_and_task')
+                username = request.user
                 category = Category(
                     category = categoryForm.cleaned_data['category'],
                     color = categoryForm.cleaned_data['color'],
-                    user = userCreatedCat
+                    user = username
                 )
                 
                 category.save()
     else:
         # only make the empty forms once rather than at the top
-        taskForm = TaskForm(prefix="task")
+        taskForm = TaskForm(prefix="task", user=request.user)
         categoryForm = CategoryForm(prefix="category")
     # pass these in for use in html
     categories = Category.objects.all()

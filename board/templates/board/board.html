@@ -79,7 +79,7 @@
         </div>
       </div>
     </nav>
-    <div class="d-flex justify-content-sm-start justify-content-center">
+    <div class="d-flex justify-content-sm-start justify-content-center mt-5">
       <a
         class="link-secondary btn btn-outline-dark"
         href="{% url 'hometouser:home' display_name=user.username%}"
@@ -128,7 +128,7 @@
             >
               {% csrf_token %} {{ categoryForm|crispy }}
               <input
-                class="btn btn-secondary"
+                class="btn btn-success"
                 type="submit"
                 value="Submit"
                 name="submitCategory"
@@ -138,7 +138,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-danger"
               data-dismiss="modal"
             >
               Close
@@ -171,7 +171,7 @@
               >
                 {% csrf_token %} {{ taskForm|crispy }}
                 <input
-                  class="btn btn-secondary"
+                  class="btn btn-success"
                   type="submit"
                   value="Submit"
                   name="submitTask"
@@ -182,7 +182,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-danger"
               data-dismiss="modal"
             >
               Close
@@ -194,9 +194,8 @@
     <div class="row">
       {% for category in categories %}
       {%if user.username == category.user.username%}
-      <div class="col-md ps-lg-5 ms-2 me-2 pe-lg-5">
-        <h1 class="text-center">{{ category.category }}</h1>
-      {%endif%}
+      <div class="col-md ps-lg-5 ms-2 me-2 pe-lg-5 ">
+        <h1 style="background-color:{{category.color}};" class=" mt-5 rounded-5 text-center">{{ category.category }}</h1>
         {% for task in tasks %} {% if category.category == task.category.category and user.username == task.user.username %}
         <div class="card my-3" style="width: 100%">
           <div class="card-body position-relative">
@@ -231,6 +230,7 @@
         </div>
         {% endif %} {% endfor %}
       </div>
+      {%endif%}
       {% endfor %}
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
