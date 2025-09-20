@@ -74,6 +74,25 @@
         </div>
     </div>
     </nav>
+    {%for category in categories%}
+    {%if user.username == category.user.username%}
+    <div class="mb-5">
+        <h2 class="w-75"style="background-color: {{category.color}}">{{ category.category }}</h2>
+        <ul class="list-group">
+        {% for task in tasks %} {% if category.category == task.category.category and user.username == task.user.username %}
+        <a href="#" class="w-75 list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{task.name}}</h5>
+            <small>{{task.due_date}}</small>
+            </div>
+            <p class="mb-1">{{task.description}}</p>
+            <small>Assigned to {{task.user_on_task}}</small>
+        </a>
+    </ul>
+    {% endif %} {% endfor %}
+    </div>
+    {% endif %} {% endfor %}
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js" integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D" crossorigin="anonymous"></script>    
 </body>
