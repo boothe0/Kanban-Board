@@ -57,26 +57,16 @@
             </ul>
             </li>
         </ul>
-        <form class="d-sm-flex" role="search">
-            <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            />
-            <button class="btn btn-outline-success me-3" type="submit">
-            Search
-            </button>
-            <a class="btn btn-outline-danger" href="{% url 'hometouser:logout' %}">
-            Logout
-            </a>
-        </form>
+
+        <a class="btn btn-outline-danger" href="{% url 'hometouser:logout' %}">
+        Logout
+        </a>
         </div>
     </div>
     </nav>
     {%for category in categories%}
     {%if user.username == category.user.username%}
-    <div class="mb-5">
+    <div class="ms-5 mb-5">
         <h2 class="w-75"style="background-color: {{category.color}}">{{ category.category }}</h2>
         <ul class="list-group">
         {% for task in tasks %} {% if category.category == task.category.category and user.username == task.user.username %}
