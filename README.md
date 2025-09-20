@@ -33,6 +33,7 @@
 4) Javascript/HTML/CSS is connected with Django
 5) Selenium is connected.
 6) Tasks update separately for each user using cards.
+7) Board and List views
 
 ### In progress...
 
