@@ -6,7 +6,16 @@
 - Selenium for testing
 - HTML
 - Bootstrap CSS
-  
+
+### Features
+1) Full user authentication and database storage.
+2) Passwords are hashed correctly for secure login.
+3) Routing between pages.
+4) Javascript/HTML/CSS is connected with Django
+5) Selenium is connected.
+6) Tasks update separately for each user using cards.
+7) Board and List views
+
 ### Prerequisites
 - Installed Django
 - Installed selenium
@@ -26,14 +35,5 @@
 - Then any models or forms made access via `User.objects.all()` (user is already created)
 - Tip: To quickly add a new user `User.objects.create_user(username='guest', password='secret')` replace guest and secret with your own variables.
 
-### Features so far
-1) Full user authentication and database storage.
-2) Passwords are hashed correctly for secure login.
-3) Routing between pages.
-4) Javascript/HTML/CSS is connected with Django
-5) Selenium is connected.
-6) Tasks update separately for each user using cards.
-7) Board and List views
 
-### In progress...
 
