@@ -5,3 +5,7 @@ img {
 .login-wrapper {
   width: fit-content;
 }
+.summary{
+  background-color: black;
+  padding-top: 600px;
+}

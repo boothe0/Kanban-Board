@@ -66,8 +66,8 @@
     </nav>
     {%for category in categories%}
     {%if user.username == category.user.username%}
-    <div class="ms-5 mb-5">
-        <h2 class="w-75"style="background-color: {{category.color}}">{{ category.category }}</h2>
+    <div class="ms-5 mb-5 ">
+        <h2 class=" ps-5 pe-5 w-75"style="background-color: {{category.color}}">{{ category.category }}</h2>
         <ul class="list-group">
         {% for task in tasks %} {% if category.category == task.category.category and user.username == task.user.username %}
         <a href="#" class="w-75 list-group-item list-group-item-action" aria-current="true">

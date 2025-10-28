@@ -1,43 +1,47 @@
-{% extends "hometouser/base.html" %}
-{% load static %}
-
-{%block info%}
-    <h1>Welcome to Kanban!</h1>
-    <div class="row">
-                <div class="col-md-4 d-sm-flex align-items-center">
-                    <img src="{% static 'hometouser/team.png' %}"/>
-                    <p>Organization keeps team morale high</p>
-                </div>
-                <div class="col-md-4 d-sm-flex align-items-center ">
-                    <img src="{% static 'hometouser/team-ladder.png' %}"/>
-                    <p>Adding tasks for everyone to help out with gets big projects done faster</p>
-                </div>
-                <div class="col-md-4 d-sm-flex align-items-center">
-                    <img class='flex' src="{% static 'hometouser/team-gear.png' %}"/>
-                    <p>A modern visual tool keeps focus on the project.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 d-sm-flex align-items-center">
-                    <img src="{% static 'hometouser/team.png' %}"/>
-                </div>
-                <div class="col-md-4 d-sm-flex align-items-center">
-                    <img src="{% static 'hometouser/team.png' %}"/>
-                </div>
-                <div class="col-md-4 d-sm-flex align-items-center">
-                    <img src="{% static 'hometouser/team.png' %}"/>
-                </div>
-            </div>
-{%endblock%}
-
-{%block button%}
-    <div class=" d-flex justify-content-center pb-3">
-        <div class="login-wrapper">
-            <a class="col link-secondary btn btn-outline-dark" href="{% url 'hometouser:make_account' %}">Make Account</a>
-        </div>
-        <div class="ms-5 login-wrapper">
-            <a class="col link-secondary btn btn-outline-dark" href="{% url 'hometouser:login' %}">Login</a>
-        </div>
-    </div>
+{% extends "hometouser/base.html" %} {% load static %} {%block info%}
+<h1>Welcome to Kanban!</h1>
+<div class="row">
+  <div class="col-md-4 d-sm-flex align-items-center">
+    <img src="{% static 'hometouser/team.png' %}" />
+    <p>Organization keeps team morale high</p>
+  </div>
+  <div class="col-md-4 d-sm-flex align-items-center">
+    <img src="{% static 'hometouser/team-ladder.png' %}" />
+    <p>
+      Adding tasks for everyone to help out with gets big projects done faster
+    </p>
+  </div>
+  <div class="col-md-4 d-sm-flex align-items-center">
+    <img class="flex" src="{% static 'hometouser/team-gear.png' %}" />
+    <p>A modern visual tool keeps focus on the project.</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4 d-sm-flex align-items-center">
+    <img src="{% static 'hometouser/collaboration.png' %}" />
+  </div>
+  <div class="col-md-4 d-sm-flex align-items-center">
+    <img src="{% static 'hometouser/boxycollaboration.jpg' %}" />
+  </div>
+  <div class="col-md-4 d-sm-flex align-items-center">
+    <img src="{% static 'hometouser/purplecollaboration.png' %}" />
+  </div>
+</div>
+{%endblock%} {%block button%}
+<div class="d-flex justify-content-center pb-3">
+  <div class="login-wrapper">
+    <a
+      class="col link-secondary btn btn-outline-dark"
+      href="{% url 'hometouser:make_account' %}"
+      >Make Account</a
+    >
+  </div>
+  <div class="ms-5 login-wrapper">
+    <a
+      class="col link-secondary btn btn-outline-dark"
+      href="{% url 'hometouser:login' %}"
+      >Login</a
+    >
+  </div>
+</div>
 {% endblock %}
-

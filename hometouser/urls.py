@@ -7,5 +7,5 @@ urlpatterns = [
     path("make-account/", views.make_account, name="make_account"),
     path("<str:display_name>/welcome/", views.home, name="home"),
     path("login/", views.login_user, name="login"),
-    path("logged-out/", views.logout_view, name="logout" )
+    path("logged-out/", views.logout_view, name="logout")
 ]
