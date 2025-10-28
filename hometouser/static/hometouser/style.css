@@ -1,0 +1,11 @@
+img {
+  max-width: 300px;
+}
+
+.login-wrapper {
+  width: fit-content;
+}
+.summary{
+  background-color: black;
+  padding-top: 600px;
+}
